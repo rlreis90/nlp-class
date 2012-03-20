@@ -1,0 +1,108 @@
+body {
+	background-image:url(../images/page-background.png);
+	background-repeat:repeat-y;
+}
+
+#banner-top {
+	height:80px;
+    border-bottom: solid 2px #CCC;
+}
+
+#course-logo-text {
+	float:left;
+}
+
+#banner-course-info {
+	float:right;
+	color:white;
+	margin-right:20px;
+	margin-top:20px;
+	text-align:right;
+}
+
+.course-instructor-name {
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.page-sidebar {
+	padding-top:10px;
+}
+
+.page-content {
+	padding-top:10px;
+}
+
+.navbar_item {
+	padding-left:32px;
+	padding-top:4px;
+	padding-bottom:4px;
+	font-size:14px;
+}
+
+.navbar_home {
+	background-image:url(../images/navbar_icons/home.png);
+	background-repeat:no-repeat;
+}
+
+.navbar_lecture {
+	background-image:url(../images/navbar_icons/lecture.png);
+	background-repeat:no-repeat;
+}
+
+.navbar_quiz {
+	background-image:url(../images/navbar_icons/quiz.png);
+	background-repeat:no-repeat;
+}
+
+.navbar_assignment {
+	background-image:url(../images/navbar_icons/assignment.png);
+	background-repeat:no-repeat;
+}
+
+.navbar_forum {
+	background-image:url(../images/navbar_icons/forum.png);
+	background-repeat:no-repeat;
+}
+
+.navbar_wiki {
+	background-image:url(../images/navbar_icons/wiki.png);
+	background-repeat:no-repeat;
+}
+
+.navbar_document {
+	background-image:url(../images/navbar_icons/document.png);
+	background-repeat:no-repeat;
+}
+
+.course-announcement {
+	padding:20px;
+	background-color:#f9f9f9;
+}
+
+.hidden {
+	position: absolute !important;   
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px); 
+}
+
+.page-sidebar > ul > li > a{
+  display: block;
+}
+
+#course-logo-text > a{
+  display: block;
+}
+
+.plain-table tbody th, .plain-table tbody td{
+  border: none;
+  padding: 2px 4px;
+}
+
+.nav a {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+}
+

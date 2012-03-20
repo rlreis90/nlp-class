@@ -1,0 +1,20 @@
+!SESSION 2012-03-20 19:10:50.324 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.7.0_03
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product -data C:\Documents and Settings\rafaelr\projects\coursera\nlp-class -product org.eclipse.epp.package.java.product
+
+!ENTRY org.scala-ide.sdt.core 2 0 2012-03-20 19:14:45.629
+!MESSAGE Couldnt find a match for 2.9.2.r25964-b20111108034957 in . Using default.
+
+!ENTRY org.eclipse.core.jobs 4 2 2012-03-20 19:18:10.793
+!MESSAGE An internal error occurred during: "Checking EPMD for new backends".
+!STACK 0
+java.lang.IllegalStateException: Job manager has been shut down.
+	at org.eclipse.core.internal.jobs.JobManager.schedule(JobManager.java:1104)
+	at org.eclipse.core.internal.jobs.InternalJob.schedule(InternalJob.java:427)
+	at org.eclipse.core.runtime.jobs.Job.schedule(Job.java:462)
+	at org.erlide.core.internal.backend.EpmdWatchJob.run(EpmdWatchJob.java:53)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)

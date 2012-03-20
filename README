@@ -1,0 +1,16 @@
+If you are interested in using the Eclipse IDE, here are the steps for importing the starter code we've distributed.
+
+    Create a new project (File -> New -> Java Project)
+    Enter a name like "SpamLord" (though it need not match the file name)
+    Under the section titled "Contents", select the option:
+
+    create project from existing source
+
+    Click "Finish". (Now you should see a project on your Package Explorer pane with the project name you gave above)
+    The last step is to set Eclipse so that it passes in command line arguments when you click the green run button. To do this, first select the project in the package explorer.
+    Then go open of the project properties window (Project -> Properties) and click on the "Run/Debug Settings" tab on the left.
+    Create a new "Configuration" by clicking the new button on the right side.
+    Choose "Java Application" and click OK in the window that pops up.
+    Rename the configuration if like and select the Arguments tab.
+    Finally, enter the appropriate command line arguments in the "Program arguments:" and click OK. (For example, on assignment 1 the arguments would be "../data/dev ../devGOLD")
+    Now, when you click the green run button, it should always pass in the arguments you've entered in the configuration.
