@@ -136,12 +136,15 @@ commandline interface takes a directory name and gold file.
 It then processes each file within that directory and extracts any
 matching e-mails or phone numbers and compares them to the gold file
 """
-#if __name__ == '__main__':
-#    if (len(sys.argv) != 3):
-#        print 'usage:\tSpamLord.py <data_dir> <gold_file>'
-#        sys.exit(0)
-#    main(sys.argv[1],sys.argv[2])
+if __name__ == '__main__':
+    #if (len(sys.argv) != 3):
+    #    print 'usage:\tSpamLord.py <data_dir> <gold_file>'
+    #    sys.exit(0)
+    #main(sys.argv[1],sys.argv[2])
 
-root = 'C:/Documents and Settings/Rafael/projects/nlp-class/pa1-spamlord-v3/data'
-main(root + '/dev', root + '/devGOLD')
+    if (len(sys.argv) != 2):
+        print 'usage:\tSpamLord.py <data_dir>'
+        sys.exit(0)
 
+    root = sys.argv[1]
+    main(root + '/dev', root + '/devGOLD')
