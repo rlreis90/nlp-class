@@ -5,6 +5,17 @@ import pprint
 
 my_first_pat = '(\w+)@(\w+).edu'
 
+def cons(xs,v):
+    for x in xs: yield x
+    yield v
+
+def join(self):
+    for xs in self:
+        for x in xs:
+            yield x
+#return [x for xs in xss for x in xs]
+
+
 """ 
 TODO
 This function takes in a filename along with the file object (actually
@@ -26,32 +37,41 @@ NOTE: You shouldn't need to worry about this, but just so you know, the
 sure you check the StringIO interface if you do anything really tricky,
 though StringIO should support most everything.
 """
-def process_file(name, f):
+def process_file(name, file):
     # note that debug info should be printed to stderr
     # sys.stderr.write('[process_file]\tprocessing file: %s\n' % (path))
-    res = []
-    for line in f:
-        matches = re.findall(my_first_pat,line)
-        for m in matches:
-            email = '%s@%s.edu' % m
-            res.append((name,'e',email))
-    return res
+    #res = []
+    #for line in f:
+    #    matches = re.findall(my_first_pat,line)
+    #    for m in matches:
+    #        email = '%s@%s.edu' % m
+    #        res.append((name,'e',email))
+    #return res
+
+        
+    def f(acc, m):
+        email = '%s@%s.edu' % m
+        return cons(acc, (name,'e',email))
+        
+    return reduce(lambda acc, line:
+            reduce(f, re.findall(my_first_pat,line), acc),
+            file,[])
 
 """
 You should not need to edit this function, nor should you alter
 its interface as it will be called directly by the submit script
 """
 def process_dir(data_path):
-    # get candidates
-    guess_list = []
-    for fname in os.listdir(data_path):
-        if fname[0] == '.':
-            continue
-        path = os.path.join(data_path,fname)
-        f = open(path,'r')
-        f_guesses = process_file(fname, f)
-        guess_list.extend(f_guesses)
-    return guess_list
+
+    def f(acc, name):
+        if name[0] == '.':
+            return guess_list
+        else:
+            path = os.path.join(data_path, name)
+            guesses = process_file(name, open(path,'r'))
+            return cons(acc, guesses)
+
+    return join(reduce(f, os.listdir(data_path), []))
 
 """
 You should not need to edit this function.
@@ -61,11 +81,15 @@ this function returns a list of tuples of the canonical form:
 """
 def get_gold(gold_path):
     # get gold answers
-    gold_list = []
-    f_gold = open(gold_path,'r')
-    for line in f_gold:
-        gold_list.append(tuple(line.strip().split('\t')))
-    return gold_list
+    #gold_list = []
+    #f_gold = open(gold_path,'r')
+    #for line in f_gold:
+    #    gold_list.append(tuple(line.strip().split('\t')))
+    #return gold_list
+
+    def f(acc, line): return cons(acc, tuple(line.strip().split('\t')))
+
+    return reduce(f, open(gold_path,'r'), [])  
 
 """
 You should not need to edit this function.
@@ -112,8 +136,12 @@ commandline interface takes a directory name and gold file.
 It then processes each file within that directory and extracts any
 matching e-mails or phone numbers and compares them to the gold file
 """
-if __name__ == '__main__':
-    if (len(sys.argv) != 3):
-        print 'usage:\tSpamLord.py <data_dir> <gold_file>'
-        sys.exit(0)
-    main(sys.argv[1],sys.argv[2])
+#if __name__ == '__main__':
+#    if (len(sys.argv) != 3):
+#        print 'usage:\tSpamLord.py <data_dir> <gold_file>'
+#        sys.exit(0)
+#    main(sys.argv[1],sys.argv[2])
+
+root = 'C:/Documents and Settings/Rafael/projects/nlp-class/pa1-spamlord-v3/data'
+main(root + '/dev', root + '/devGOLD')
+

@@ -12,7 +12,7 @@ class NullDevice:
   def write(self, s):
     pass
 
-def submit(partId):   
+def submit(partId):
   print '==\n== [nlp] Submitting Solutions | Programming Exercise %s\n=='% homework_id()
   if(not partId):
     partId = promptPart()
