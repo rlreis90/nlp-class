@@ -47,15 +47,14 @@ def process_file(name, file):
     #        email = '%s@%s.edu' % m
     #        res.append((name,'e',email))
     #return res
-
-        
-    def f(acc, m):
-        email = '%s@%s.edu' % m
-        return cons(acc, (name,'e',email))
         
     return reduce(lambda acc, line:
-            reduce(f, re.findall(my_first_pat,line), acc),
-            file,[])
+            reduce(lambda xs, m:
+                cons(xs, (name,'e','%s@%s.edu' % m)),
+                re.findall(my_first_pat,line),
+                acc),
+            file,
+            [])
 
 """
 You should not need to edit this function, nor should you alter
@@ -79,7 +78,7 @@ Given a path to a tsv file of gold e-mails and phone numbers
 this function returns a list of tuples of the canonical form:
 (filename, type, value)
 """
-def get_gold(gold_path):
+def get_gold(path):
     # get gold answers
     #gold_list = []
     #f_gold = open(gold_path,'r')
@@ -87,9 +86,10 @@ def get_gold(gold_path):
     #    gold_list.append(tuple(line.strip().split('\t')))
     #return gold_list
 
-    def f(acc, line): return cons(acc, tuple(line.strip().split('\t')))
-
-    return reduce(f, open(gold_path,'r'), [])  
+    return reduce(lambda acc, line:
+        cons(acc, tuple(line.strip().split('\t'))),
+        open(path,'r'),
+        [])  
 
 """
 You should not need to edit this function.
@@ -141,10 +141,6 @@ if __name__ == '__main__':
     #    print 'usage:\tSpamLord.py <data_dir> <gold_file>'
     #    sys.exit(0)
     #main(sys.argv[1],sys.argv[2])
-
-    if (len(sys.argv) != 2):
-        print 'usage:\tSpamLord.py <data_dir>'
-        sys.exit(0)
-
-    root = sys.argv[1]
+    
+    root = '../data'
     main(root + '/dev', root + '/devGOLD')
