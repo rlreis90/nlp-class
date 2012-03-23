@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4ffeca76-d506-499a-bd6c-8c9c39b955ad}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>SpamLord.py</StartupFile>
+    <StartupFile>C:\Documents and Settings\Rafael\projects\nlp-class\pa1-spamlord-v3\python\SpamLord.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <AssemblyName>SpamLord</AssemblyName>

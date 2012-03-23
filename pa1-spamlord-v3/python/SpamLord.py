@@ -41,21 +41,28 @@ def process_file(name, file):
   gen_pattern = '([\w|\.]+?)(?: \(.*?)?\s*@\s*([\w|\.]+?).edu'
   engler_pattern = '(\w+?) WHERE (\w+?) DOM edu'
 
-  phone_pattern = '(\d{3})(?:-|\s)(\d{3})(?:-|\s)(\d{4})'
+  phone_pattern = '(\d{3})(?:-|\s|(?:&thinsp;))(\d{3})(?:-|\s|(?:&thinsp;))(\d{4})'
   
   for line in file:
     for email in re.findall(gen_pattern,line) \
                + re.findall(engler_pattern,line) \
-               + [(y, x) for x, y in re.findall('obfuscate\(\'(\w+?).edu\',\'(\w+?)\'\)',line)]: # \
-               #+ re.findall('[eE]-?mail: (\w+?) at ([\.a-z]+?)(?: dot |\.)edu',line):
+               + [(y, x) for x, y in re.findall('obfuscate\(\'(\w+?).edu\',\'(\w+?)\'\)',line)]:
       yield (name,'e','%s@%s.edu' % email)     
     
-    for email in re.findall('[eE]-?mail(?::| to) (\w+?) at ([\.a-z]+)(?: dot | dt |\.)([a-z]+)',line):
-      yield (name,'e','%s@%s.%s' % email)
-      
-    for email in re.findall('[eE]-?mail(?::| to) (\w+?) at ([\.a-z]+)(?: dot | dt |\.)([\.a-z]+)(?: dot | dt |\.)([a-z]+)',line):
-      yield (name,'e','%s@%s.%s.%s' % email)
-
+    #for email in re.findall('[eE]-?mail(?::| to) (\w+?) at ([\.a-z]+)(?: do?t |\.)([a-z]+)',line):
+    #  yield (name,'e','%s@%s.%s' % email)
+    #  
+    #for email in re.findall('[eE]-?mail(?::| to) (\w+?) at ([\.a-z]+)(?: do?t |\.)([\.a-z]+)(?: do?t \.)([a-z]+)',line):
+    #  yield (name,'e','%s@%s.%s.%s' % email)
+        
+    for email in re.findall('[eE]-?mail(?::| to) (\w+?)(?:\s+|\()at(?:\s+|\))([\.a-z]+)(?: do?t |\.)([\.a-z]+)(?:(?: do?t |\.)([.a-z]+))?',line):
+      _, _, _, x = email
+      if x != '':
+        yield (name,'e','%s@%s.%s.%s' % email)
+      else:
+        yield (name,'e','%s@%s.%s%s' % email)
+        
+    
     for phone in re.findall(phone_pattern,line) \
                + re.findall('\((\d{3})\)\s*(\d{3})-(\d{4})',line):
       yield (name,'p','%s-%s-%s' % phone)
@@ -126,8 +133,6 @@ def score(guess_list, gold_list):
     pp.pprint([(x,y,z, [c for (a,b,c) in guess_list if a == x and b == y]) for (x,y,z) in fn])
     print 'Summary: tp=%d, fp=%d, fn=%d' % (len(tp),len(fp),len(fn))
   
-    #print ['%s-%s-%s' % phone for phone in re.findall('(\d{3})-(\d{3})-(\d{4})', '650-723-6092')]
-    #print ['%s@%s' % email for email in re.findall(gen_pattern, 'dumb@stanford.edu')]
     print ''
 
 """
