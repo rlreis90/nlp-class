@@ -55,8 +55,12 @@ def process_file(name, file):
     #for email in re.findall('[eE]-?mail(?::| to) (\w+?) at ([\.a-z]+)(?: do?t |\.)([\.a-z]+)(?: do?t \.)([a-z]+)',line):
     #  yield (name,'e','%s@%s.%s.%s' % email)
         
+<<<<<<< HEAD
     #for email in re.findall('[eE]-?mail(?::| to) (\w+?)(?:\s+|\()at(?:\s+|\))([\.a-z]+)(?: do?t |\.)([\.a-z]+)(?:(?: do?t |\.)([.a-z]+))?',line):
     for email in re.findall('(\w+?)(?:\s+|\()at(?:\s+|\))([\.a-z]+)(?: do?t )([\.a-z]+)(?:(?: do?t |\.)([.a-z]+))?',line):
+=======
+    for email in re.findall('[eE]-?mail(?::| to) (\w+?)(?:\s+|\()at(?:\s+|\))([\.a-z]+)(?: do?t |\.)([\.a-z]+)(?:(?: do?t |\.)([.a-z]+))?',line):
+>>>>>>> 50e2f44e9f9eb1f567c8b962baaf67075c4c7b4e
       _, _, _, x = email
       if x != '':
         yield (name,'e','%s@%s.%s.%s' % email)
